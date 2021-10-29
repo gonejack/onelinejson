@@ -1,19 +1,19 @@
-# unfmtjson
+# one line json
 
-Format multiline json to one line.
+This command line format .json file to one line format.
 
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/gonejack/unfmtjson)
-![Build](https://github.com/gonejack/unfmtjson/actions/workflows/go.yml/badge.svg)
-[![GitHub license](https://img.shields.io/github/license/gonejack/unfmtjson.svg?color=blue)](LICENSE)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/gonejack/onelinejson)
+![Build](https://github.com/gonejack/onelinejson/actions/workflows/go.yml/badge.svg)
+[![GitHub license](https://img.shields.io/github/license/gonejack/onelinejson.svg?color=blue)](LICENSE)
 
 ### Install
 ```shell
-> go get github.com/gonejack/unfmtjson
+> go get github.com/gonejack/onelinejson
 ```
 
 ### Usage
 ```shell
-> unfmtjson *.json
+> onelinejson *.json
 ```
 
 ### Before

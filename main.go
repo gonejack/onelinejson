@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -10,27 +9,29 @@ import (
 )
 
 func main() {
-	for _, a := range os.Args[1:] {
-		fd, err := os.Open(a)
-		if err != nil {
-			log.Fatalf("open file failed: %s", err)
+	for _, name := range os.Args[1:] {
+		f, e := os.Open(name)
+		if e != nil {
+			log.Fatalf("open file failed: %s", e)
 		}
 
 		var v interface{}
-		err = json.NewDecoder(fd).Decode(&v)
-		if err != nil {
-			log.Fatalf("decode json failed: %s", err)
+		e = json.NewDecoder(f).Decode(&v)
+		if e != nil {
+			log.Fatalf("decode json failed: %s", e)
+		}
+		f.Close()
+
+		o := strings.TrimSuffix(name, filepath.Ext(name)) + ".oneline.json"
+		w, e := os.Create(o)
+		if e != nil {
+			log.Fatalf("cannot create file %s: %s", o, e)
 		}
 
-		data, err := json.Marshal(v)
-		if err != nil {
-			log.Fatalf("encode json failed: %s", err)
+		e = json.NewEncoder(w).Encode(v)
+		if e != nil {
+			log.Fatalf("encode json failed: %s", e)
 		}
-
-		output := strings.TrimSuffix(a, filepath.Ext(a)) + ".unfmt.json"
-		err = ioutil.WriteFile(output, data, 0666)
-		if err != nil {
-			log.Fatalf("write file failed: %s", err)
-		}
+		w.Close()
 	}
 }
